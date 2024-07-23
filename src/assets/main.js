@@ -5,7 +5,7 @@ const urlAlbum = 'https://spotify23.p.rapidapi.com/artist_albums/?id=4Z8W4fKeB5Y
 
 
 const content = null || document.getElementById('videos')
-const albums = null || document.getElementById('albums')
+const albumsContent = null || document.getElementById('albums')
 
 const optionsVideo = {
 	method: 'GET',
@@ -61,22 +61,22 @@ async function fetchData(url, options) {
         const albums = await fetchData(urlAlbum, optionsAlbum);
         let view = `
         ${albums.data.artist.discography.albums.items.map(album => `
-            <div class="bg-gray-300 rounded-lg p-4">
+            <div class="bg-white-300 rounded-lg p-4">
         <a href="${album.releases.items[0].sharingInfo.shareUrl}" target="_blank">
             <img class="w-full mb-4 rounded-lg" src="${album.releases.items[0].coverArt.sources[0].url}"
                 alt="Portada ${album.releases.items[0].name}">
             <div class="text-center">
                 <h3 class="text-2xl font-bold text-gray-800 mb-2">${album.releases.items[0].name}</h3>
                 <p class="text-base font-medium">
-                    Año: ${album.releases.items[0].date.year} <br>
-                    Canciones: ${album.releases.items[0].tracks.totalCount}
+                    Year: ${album.releases.items[0].date.year} <br>
+                    Songs: ${album.releases.items[0].tracks.totalCount}
                 </p>
             </div>
         </a>
       </div>
         `).join('')}
         `;
-    albums.innerHTML = view;
+    albumsContent.innerHTML = view;
     } catch (error){
         console.error(error)
     }
